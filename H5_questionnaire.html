@@ -6,203 +6,303 @@
     <script src="js/zepto.min.js"></script>
     <script src="js/touch.js"></script>
     <link href="//cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
-    <title>H5_questionnaire</title>
+    <title>H5调查问券模板</title>
     <style>
         * {
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
 
         section {
             width: 100%;
-            overflow: hidden;
+            position: absolute;
             text-align: center;
         }
 
-        .mainContent {
-            position: relative;
-        }
-
         .page1 {
-            background: #00bb00;
-            position: relative;
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/homeBG.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
 
         .page2 {
-            background: #00A4F1;
-            position: relative;
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/questionBg.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
 
         .page3 {
-            background: #a9c700;
-            position: relative;
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/homeBG.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
 
         .page4 {
-            background: #0000ff;
-            position: relative;
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/questionBg.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
 
         .page5 {
-            background: #f63737;
-            position: relative;
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/homeBG.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+
+        .page6 {
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/questionBg.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
 
         .hide {
             display: none;
         }
 
-        .show {
-            display: inline-block;
+        .page_outFromTop {
+            -webkit-animation: page_outFromTopFram .5s linear both;
+            animation: page_outFromTopFram .5s linear both;
         }
 
-        .pageOut_next {
-            -webkit-animation: moveOut_next .5s linear both;
-            animation: moveOut_next .5s linear both;
-        }
-
-        @-webkit-keyframes moveOut_next {
+        @-webkit-keyframes page_outFromTopFram {
             100% {
                 -webkit-transform: translateY(-100%);
-                opacity: 0;
-                /*display: none;*/
             }
         }
 
-        @keyframes moveOut_next {
+        @keyframes page_outFromTopFram {
             100% {
                 transform: translateY(-100%);
-                opacity: 0;
-                /*display: none;*/
             }
         }
 
-        .pageIn_next {
-            -webkit-animation: moveIn_next .5s linear both;
-            animation: moveIn_next .5s linear both;
+        .page_inFromBottom {
+            -webkit-animation: page_inFromBottomFram .5s linear both;
+            animation: page_inFromBottomFram .5s linear both;
         }
 
-        @-webkit-keyframes moveIn_next {
-            100% {
+        @-webkit-keyframes page_inFromBottomFram {
+            0% {
                 -webkit-transform: translateY(100%);
-                display: none;
             }
-        }
-
-        @keyframes moveIn_next {
             100% {
+                -webkit-transform: translateY(0%);
+            }
+        }
+
+        @keyframes page_inFromBottomFram {
+            0% {
                 transform: translateY(100%);
-                display: none;
+            }
+            100% {
+                transform: translateY(0%);
             }
         }
 
-        .pageIn_pre{
-            -webkit-animation: moveIn_pre .5s linear both;
-            animation: moveIn_pre .5s linear both;
-        }
-        @-webkit-keyframes moveIn_pre {
-            100%{
-                -webkit-transform: translateY(0);
-            }
-        }
-        @keyframes moveIn_pre {
-            100%{
-                transform: translateY(0);
-            }
+        .page_outFromBottom {
+            -webkit-animation: page_outFromBottomFram .5s linear both;
+            animation: page_outFromBottomFram .5s linear both;
         }
 
-
-
-        .pageOut_pre {
-            -webkit-animation: moveOut_pre .5s linear both;
-            animation: moveOut_pre .5s linear both;
-        }
-
-        @-webkit-keyframes moveOut_pre {
+        @-webkit-keyframes page_outFromBottomFram {
             100% {
                 -webkit-transform: translateY(100%);
             }
         }
 
-        @keyframes moveOut_pre {
+        @keyframes page_outFromBottomFram {
             100% {
-                transform: translateY(100%);
+                -webkit-transform: translateY(100%);
             }
         }
+
+        .page_inFromTop {
+            -webkit-animation: page_inFormTopFram .5s linear both;
+            animation: page_inFormTopFram .5s linear both;
+        }
+
+        @-webkit-keyframes page_inFormTopFram {
+            0% {
+                -webkit-transform: translateY(-100%);
+            }
+            100% {
+                -webkit-transform: translateY(0%);
+            }
+        }
+
+        @keyframes page_inFormTopFram {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0%);
+            }
+        }
+
+        .page_outFromLeft {
+            -webkit-animation: page_outFromLeftFram .5s linear both;
+            animation: page_outFromLeftFram .5s linear both;
+        }
+
+        @-webkit-keyframes page_outFromLeftFram {
+            100% {
+                -webkit-transform: translateX(-100%);
+            }
+        }
+
+        @keyframes page_outFromLeftFram {
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .page_inFromRight {
+            -webkit-animation: page_inFromRightFram .5s linear both;
+            animation: page_inFromRightFram .5s linear both;
+        }
+
+        @-webkit-keyframes page_inFromRightFram {
+            0% {
+                -webkit-transform: translateX(100%);
+            }
+            100% {
+                -webkit-transform: translateX(0%);
+            }
+        }
+
+        @keyframes page_inFromRightFram {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
+        .page_outFromRight {
+            -webkit-animation: page_outFromRightFram .5s linear both;
+            animation: page_outFromRightFram .5s linear both;
+        }
+
+        @-webkit-keyframes page_outFromRightFram {
+            100% {
+                -webkit-transform: translateX(100%);
+            }
+        }
+
+        @keyframes page_outFromRightFram {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .page_inFromLeft {
+            -webkit-animation: page_inFromLeftFram .5s linear both;
+            animation: page_inFromLeftFram .5s linear both;
+        }
+
+        @-webkit-keyframes page_inFromLeftFram {
+            0% {
+                -webkit-transform: translateX(-100%);
+            }
+            100% {
+                -webkit-transform: translateX(0%);
+            }
+        }
+
+        @keyframes page_inFromLeftFram {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
     </style>
 </head>
 <body>
-<div class="mainContent">
-    <section class="page1">
-        <br>
-        <br>
-        <br>
-        第一页<br>
-        第一页<br>
-        第一页<br>
-        第一页<br>
-        第一页<br>
-        第一页<br>
-    </section>
-    <section class="page2 hide">
-        <br>
-        <br>
-        <br>
-        第二页<br>
-        第二页<br>
-        第二页<br>
-        第二页<br>
-        第二页<br>
-    </section>
-    <section class="page3 hide">
-        <br>
-        <br>
-        <br>
-        第三页<br>
-        第三页<br>
-        第三页<br>
-        第三页<br>
-        第三页<br>
-    </section>
-    <section class="page4 hide">
-        <br>
-        <br>
-        <br>
-        第四页<br>
-        第四页<br>
-        第四页<br>
-        第四页<br>
-        第四页<br>
-        第四页<br>
-    </section>
-    <section class="page5 hide">
-        <br>
-        <br>
-        <br>
-        第五页<br>
-        第五页<br>
-        第五页<br>
-        第五页<br>
-        第五页<br>
-        第五页<br>
-    </section>
-</div>
+<section class="page1">
+    <br>
+    <br>
+    <br>
+    第一页<br>
+    第一页<br>
+    第一页<br>
+    第一页<br>
+    第一页<br>
+</section>
+<section class="page2 hide">
+    <br>
+    <br>
+    <br>
+    第二页<br>
+    第二页<br>
+    第二页<br>
+    第二页<br>
+    第二页<br>
+</section>
+<section class="page3 hide">
+    <br>
+    <br>
+    <br>
+    第三页<br>
+    第三页<br>
+    第三页<br>
+    第三页<br>
+    第三页<br>
+</section>
+<section class="page4 hide">
+    <br>
+    <br>
+    <br>
+    第四页<br>
+    第四页<br>
+    第四页<br>
+    第四页<br>
+    第四页<br>
+</section>
+<section class="page5 hide">
+    <br>
+    <br>
+    <br>
+    第五页<br>
+    第五页<br>
+    第五页<br>
+    第五页<br>
+    第五页<br>
+</section>
+<section class="page6 hide">
+    <br>
+    <br>
+    <br>
+    第六页<br>
+    第六页<br>
+    第六页<br>
+    第六页<br>
+    第六页<br>
+</section>
+
+
 <script>
     var winWidth;
     var winHeight;
-    var prePage = 1;
+    var prePage;
     var nowPage = 1;
-    var maxPage = 5;
+    var maxPage = 6;
+    var outPage;
+    var inPage;
+    var isAnimation = false;
 
     //获取相关设备尺寸
     function getWindowSize() {
-        //获取窗口宽度，下方用于兼容浏览器
+//获取窗口宽度，下方用于兼容浏览器
         if (window.innerWidth) {
             winWidth = window.innerWidth;
         } else if ((document.body) && (document.body.clientWidth)) {
             winWidth = document.body.clientWidth;
         }
-        //获取窗口高度，下方用于兼容浏览器
+//获取窗口高度，下方用于兼容浏览器
         if (window.innerHeight) {
             winHeight = window.innerHeight;
         } else if ((document.body) && (document.body.clientHeight)) {
@@ -215,7 +315,6 @@
     }
 
     window.onload = function () {
-        //绑定zepto的touchmove事件
         getWindowSize();
         swipe();
     };
@@ -226,93 +325,91 @@
             event.preventDefault();
         }, false);
         $(document).swipeUp(function () { //手指上划
-            goPage("next");
+            if (isAnimation == false) {
+                goPage("next");
+            }
         });
         $(document).swipeDown(function () { //手指下划
-            goPage("pre");
+            if (isAnimation == false) {
+                goPage("pre");
+            }
         });
         $(document).swipeLeft(function () { //手指左划
-            goPage("next");
+            if (isAnimation == false) {
+                goPage("left");
+            }
         });
         $(document).swipeRight(function () { //手指右划
-            goPage("pre");
+            if (isAnimation == false) {
+                goPage("right");
+            }
         })
     }
 
-    //翻页功能
+    //翻页事件
     function goPage(stage) {
-        if (stage == "next") { //看下页
+        if (stage == "next") {
             prePage = nowPage;
-            console.log("prePage=" + prePage);
             if (nowPage == maxPage) {
                 nowPage = 1;
             } else {
                 nowPage++;
-                console.log("nowPage=" + nowPage);
             }
-            //调用切换页面时动画效果
-            animationBasic_next()
-
-        } else if (stage == "pre") { //看上页
+            animationBasic("next");
+        } else if (stage == "pre") {
             prePage = nowPage;
-            console.log("prePage=" + prePage);
             if (nowPage == 1) {
                 nowPage = maxPage;
             } else {
                 nowPage--;
-                console.log("nowPage=" + nowPage);
             }
-            //调用切换页面时动画效果
-            animationBasic_pre();
+            animationBasic("pre");
+        } else if (stage == "left") {
+            prePage = nowPage;
+            if (nowPage == maxPage) {
+                nowPage = 1;
+            } else {
+                nowPage++;
+            }
+            animationBasic("left");
+        } else if (stage == "right") {
+            prePage = nowPage;
+            if (nowPage == 1) {
+                nowPage = maxPage;
+            } else {
+                nowPage--;
+            }
+            animationBasic("right");
         }
-    }
 
-    //下方为无动画效果切屏函数,效果不区分上划还是下划
-    function noAnimation() {
-        $(".page" + prePage).addClass("hide");
-        $(".page" + prePage).removeClass("show");
-        $(".page" + nowPage).addClass("show");
-        $(".page" + nowPage).removeClass("hide");
     }
+    //基本划屏动画效果
+    function animationBasic(direction) {
+        if (direction == "next") {
+            outPage = "page_outFromTop";
+            inPage = "page_inFromBottom";
+        } else if (direction == "pre") {
+            outPage = "page_outFromBottom";
+            inPage = "page_inFromTop";
+        } else if (direction == "left") {
+            outPage = "page_outFromLeft";
+            inPage = "page_inFromRight";
+        } else if (direction == "right") {
+            outPage = "page_outFromRight";
+            inPage = "page_inFromLeft";
+        }
 
-    //下方为基本动画-上划(看下页)效果切屏函数
-    function animationBasic_next() {
-        $(".page" + prePage).addClass("pageOut_next");
-        $(".page" + nowPage).removeClass("hide");
+        $(".page" + prePage).removeClass("hide").addClass(outPage);
+        $(".page" + nowPage).removeClass("hide").addClass(inPage);
+        isAnimation = true;
         setTimeout(function () {
-            $(".page" + nowPage).addClass("pageIn_next");
-            $(".page" + prePage).removeClass("pageOut_next");
-            $(".page" + prePage).addClass("hide");
-            $(".page" + nowPage).removeClass("pageIn_next");
-            $(".page" + nowPage).removeClass("hide");
-        }, 500);
+            $(".page" + prePage).removeClass(outPage).addClass("hide");
+            $(".page" + nowPage).removeClass(inPage);
+            isAnimation = false;
+        }, 500)
     }
 
-    //下方为基本动画-下划(看上页)效果切屏函数
-    function animationBasic_pre() {
-        $(".page" + prePage).addClass("pageOut_pre");
-        setTimeout(function () {
-            $(".page" + nowPage).removeClass("hide");
-            $(".page" + nowPage).addClass("pageIn_pre");
-            $(".page" + prePage).removeClass("pageOut_pre");
-            $(".page" + prePage).addClass("hide");
-            $(".page" + nowPage).removeClass("pageIn_pre");
-            $(".page" + nowPage).removeClass("hide");
-        }, 500);
-    }
-
-    //下方为旋转移出效果切屏函数
-    function animationRotate() {
-        $(".page" + prePage).addClass("animated rollOut");
-        $(".page" + nowPage).removeClass("hide");
-        setTimeout(function () {
-            $(".page" + nowPage).addClass("animated rollIn");
-            $(".page" + prePage).removeClass("animated rollOut");
-            $(".page" + prePage).addClass("hide");
-            $(".page" + nowPage).removeClass("animated rollIn");
-            $(".page" + nowPage).removeClass("hide");
-        }, 500);
-    }
 </script>
+
 </body>
 </html>
