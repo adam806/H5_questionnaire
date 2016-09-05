@@ -523,6 +523,7 @@
     var tipN;
     var nextYId;
     var nextNId;
+    var isChosen = false;
 
     //获取相关设备尺寸
     function getWindowSize() {
@@ -684,7 +685,9 @@
     }
 
     $(".option").click(function () {
-        $(this).addClass("choseBGC");
+        if(isChosen==false){
+            $(this).addClass("choseBGC");
+        }
     });
 
     //取得问题
@@ -701,7 +704,7 @@
                 curQuestion = question;
                 showQuestion();
                 tipY = question.answers.y.pop;
-
+                tipN = question.answers.n.pop;
                 $(".question_And_Options li").show();
                 console.log("下方console出的是从服务器取回的当前这道题目");
                 console.log(question);
@@ -716,17 +719,28 @@
 
     //点击是
     $(".choseA").bind("click", function () {
-        selectedAnswer = "y";
-        $(".tip_Pop").text(tipY).show();
-        $(".nextBtn").show();
+        if (isChosen == false) {
+            selectedAnswer = "y";
+            $(".tip_Pop").text(tipY).show();
+            $(".nextBtn").show();
+            isChosen = true;
+            return isChosen;
+            console.log(isChosen);
+        }
 //        $(".choseB").unbind("click");//选中一个选项后其他项则不可点击
     });
 
+
     //点击否
+
     $(".choseB").bind("click", function () {
-        selectedAnswer = "n";
-        $(".tip_Pop").text(tipN).show();
-        $(".nextBtn").show();
+        if (isChosen == false) {
+            selectedAnswer = "n";
+            $(".tip_Pop").text(tipN).show();
+            $(".nextBtn").show();
+            isChosen = true;
+            return isChosen;
+        }
 //        $(".choseA").unbind("click");//选中一个选项后其他项则不可点击
     });
 
@@ -737,6 +751,7 @@
         $(".nextBtn").hide();
         $(".tip_Pop").hide();
         $(".option").removeClass("choseBGC");
+        isChosen = false;
     });
 
 
