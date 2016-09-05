@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="//cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
     <script src="js/zepto.min.js"></script>
     <script src="js/touch.js"></script>
-    <link href="//cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> <!--微信jssdk-->
     <title>H5调查问券模板</title>
     <style>
         * {
@@ -13,10 +14,113 @@
             margin: 0;
         }
 
+        .loadingPage {
+            background: #0000ff;
+            width: 100%;
+        }
+
         section {
             width: 100%;
             position: absolute;
+        }
+
+        .mainContainer {
+            display: none;
+        }
+
+        .questionNum {
+            position: fixed;
+            z-index: 2;
+            width: 100%;
             text-align: center;
+        }
+
+        .page_Footer {
+            position: fixed;
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+            bottom: 15px;
+        }
+
+        .playMusicBtn {
+            position: fixed;
+            z-index: 2;
+            right: 43px;
+            top: 20px;
+        }
+
+        .playMusicNeedle {
+            position: fixed;
+            z-index: 2;
+            right: 42px;
+            /*-webkit-transform: rotate(30deg);*/
+            /*transform: rotate(20deg);*/
+        }
+
+        .needleRotate {
+            -webkit-animation: neeleRotateframes .3s linear both;
+            animation: neeleRotateframes .3s linear both;
+        }
+
+        .needleRotateBack {
+            -webkit-animation: needleRotateBackframes .3s linear both;
+            animation: needleRotateBackframes .3s linear both;
+        }
+
+        @-webkit-keyframes needleRotateBackframes {
+            100% {
+                -webkit-transform: rotate(20deg);
+            }
+        }
+
+        @keyframes needleRotateBackframes {
+            100% {
+                transform: rotate(20deg);
+            }
+        }
+
+        @-webkit-keyframes neeleRotateframes {
+            100% {
+                -webkit-transform: rotate(-20deg);
+            }
+        }
+
+        @keyframes neeleRotateframes {
+            100% {
+                transform: rotate(-20deg);
+            }
+        }
+
+        .musicRotate {
+            -webkit-animation: musicRotateKeyframes 1s linear infinite both;
+            animation: musicRotateKeyframes 1s linear infinite both;
+        }
+
+        @-webkit-keyframes musicRotateKeyframes {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes musicRotateKeyframes {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .nextBtn {
+            width: 50%;
+            position: absolute;
+            top: 71%;
+            left: 27%;
+            display: none;
         }
 
         .page1 {
@@ -57,6 +161,12 @@
 
         .hide {
             display: none;
+        }
+
+        .resultPage {
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/resultBG.png) no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
 
         .page_outFromTop {
@@ -219,71 +329,184 @@
             }
         }
 
+        .question_Title {
+            color: #000;
+        }
+
+        .question_And_Options {
+            position: absolute;
+            width: 80%;
+            height: auto;
+            top: 25%;
+            border: 1px solid #000;
+            left: 8%;
+        }
+
+        .question_And_Options li {
+            list-style: none;
+            display: none;
+        }
+
+        .choseBGC {
+            background: #a9c700;
+        }
+
+        .choseB {
+            margin-top: 20px;
+        }
+
+        .tip_Pop {
+            position: absolute;
+            top: 50%;
+            left: 8%;
+            width: 80%;
+            display: none;
+        }
+
+        .resultPage {
+            text-align: center;
+        }
+
+        .result_Title {
+            position: relative;
+            margin-top: 5%;
+        }
+
+        .result_Point {
+            width: 100%;
+            text-align: center;
+        }
+
+        .result_Word {
+            display: inline-block;
+            width: 35%;
+        }
+
+        .result_Num {
+            background: url(http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/numBG.png) no-repeat;
+            background-size: contain;
+            background-position: 0;
+            font-size: 40px;
+            font-weight: bold;
+            display: inline-block;
+            padding: 0 4%;
+        }
+
+        .result_Editor_Photo {
+            width: 50%;
+        }
+
+        .result_Description {
+            font-weight: bold;
+        }
+
+        .shareBtn {
+            width: 30%;
+        }
+
+        .remind {
+            font-weight: bold;
+        }
+
+        .check_Result {
+            font-weight: bold;
+        }
+
+        .QR_Code {
+            width: 40%;
+        }
+
     </style>
 </head>
 <body>
-<section class="page1">
-    <br>
-    <br>
-    <br>
-    第一页<br>
-    第一页<br>
-    第一页<br>
-    第一页<br>
-    第一页<br>
-</section>
-<section class="page2 hide">
-    <br>
-    <br>
-    <br>
-    第二页<br>
-    第二页<br>
-    第二页<br>
-    第二页<br>
-    第二页<br>
-</section>
-<section class="page3 hide">
-    <br>
-    <br>
-    <br>
-    第三页<br>
-    第三页<br>
-    第三页<br>
-    第三页<br>
-    第三页<br>
-</section>
-<section class="page4 hide">
-    <br>
-    <br>
-    <br>
-    第四页<br>
-    第四页<br>
-    第四页<br>
-    第四页<br>
-    第四页<br>
-</section>
-<section class="page5 hide">
-    <br>
-    <br>
-    <br>
-    第五页<br>
-    第五页<br>
-    第五页<br>
-    第五页<br>
-    第五页<br>
-</section>
-<section class="page6 hide">
-    <br>
-    <br>
-    <br>
-    第六页<br>
-    第六页<br>
-    第六页<br>
-    第六页<br>
-    第六页<br>
-</section>
+<div class="loadingPage" id="loadingPage">
+    加载中，请稍等！
+</div>
+<div class="mainContainer">
+    <audio class="playMusic" id="playMusic" loop="loop" autoplay="autoplay"
+           src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/bgm.mp3"></audio>
+    <div class="questionNum">
+        <span class="question_Num">1</span>/<span>100</span>
+    </div>
+    <div class="page_Footer">这是页脚</div>
+    <img class="playMusicBtn musicRotate" id="playMusicBtn" src="images/playMusic.png">
+    <img class="playMusicNeedle needleRotateBack" src="images/needle.png">
 
+    <section class="page1">
+        <div class="question_And_Options">
+            <p class="question_Title">正在获取问题...</p>
+            <br>
+            <ul class="options_List">
+                <li class="option choseA">A:是</li>
+                <li class="option choseB">B:否</li>
+            </ul>
+        </div>
+        <p class="tip_Pop">正在获取吐槽...</p>
+        <img class="nextBtn" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/next.png">
+    </section>
 
+    <section class="page2 hide resultPage">
+        <img class="result_Title" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/resn1.png">
+        <div class="result_Point">
+            <img class="result_Word" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/resultTitle.png">
+            <span class="result_Num">0</span>
+        </div>
+        <p class="result_Description">这是一段根据得分得出的描述</p>
+        <div class="result_Editor">
+            <img class="result_Editor_Photo"
+                 src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/testResult_contentAndButton.png">
+        </div>
+        <img class="shareBtn" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/shareBtn.png">
+        <p class="remind">长按二维码关注"自在"公众号</p>
+        <p class="check_Result">查看抽奖结果</p>
+        <img class="QR_Code" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/recognize.jpg">
+
+    </section>
+    <section class="page3 hide">
+        <br>
+        <br>
+        <br>
+        第三页<br>
+        第三页<br>
+        第三页<br>
+        第三页<br>
+        第三页<br>
+        <img class="nextBtn" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/next.png">
+    </section>
+    <section class="page4 hide">
+        <br>
+        <br>
+        <br>
+        第四页<br>
+        第四页<br>
+        第四页<br>
+        第四页<br>
+        第四页<br>
+        <img class="nextBtn" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/next.png">
+    </section>
+    <section class="page5 hide">
+        <br>
+        <br>
+        <br>
+        第五页<br>
+        第五页<br>
+        第五页<br>
+        第五页<br>
+        第五页<br>
+        <img class="nextBtn" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/next.png">
+    </section>
+    <section class="page6 hide">
+        <br>
+        <br>
+        <br>
+        第六页<br>
+        第六页<br>
+        第六页<br>
+        第六页<br>
+        第六页<br>
+        <img class="nextBtn" src="http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/next.png">
+    </section>
+</div>
 <script>
     var winWidth;
     var winHeight;
@@ -293,16 +516,23 @@
     var outPage;
     var inPage;
     var isAnimation = false;
+    var selectedAnswer = "y";
+    var curQid;
+    var curQuestion;
+    var tipY;
+    var tipN;
+    var nextYId;
+    var nextNId;
 
     //获取相关设备尺寸
     function getWindowSize() {
-//获取窗口宽度，下方用于兼容浏览器
+        //获取窗口宽度，下方用于兼容浏览器
         if (window.innerWidth) {
             winWidth = window.innerWidth;
         } else if ((document.body) && (document.body.clientWidth)) {
             winWidth = document.body.clientWidth;
         }
-//获取窗口高度，下方用于兼容浏览器
+        //获取窗口高度，下方用于兼容浏览器
         if (window.innerHeight) {
             winHeight = window.innerHeight;
         } else if ((document.body) && (document.body.clientHeight)) {
@@ -312,13 +542,24 @@
         for (var i = 0; i < page1.length; i++) {
             page1[i].style.height = winHeight + "px";
         }
+
+        var load = document.getElementById("loadingPage");
+        load.style.height = winHeight + "px";
     }
 
     window.onload = function () {
         getWindowSize();
+        loading();
         swipe();
+        getQuestion(0);
     };
 
+    function loading() {
+        if (document.readyState == "complete") {
+            $(".loadingPage").hide();
+            $(".mainContainer").show();
+        }
+    }
     //手指划屏事件
     function swipe() {
         document.addEventListener("touchmove", function (event) {
@@ -326,7 +567,7 @@
         }, false);
         $(document).swipeUp(function () { //手指上划
             if (isAnimation == false) {
-                goPage("next");
+                goPage("down");
             }
         });
         $(document).swipeDown(function () { //手指下划
@@ -348,14 +589,14 @@
 
     //翻页事件
     function goPage(stage) {
-        if (stage == "next") {
+        if (stage == "down") {
             prePage = nowPage;
             if (nowPage == maxPage) {
                 nowPage = 1;
             } else {
                 nowPage++;
             }
-            animationBasic("next");
+            animationBasic("down");
         } else if (stage == "pre") {
             prePage = nowPage;
             if (nowPage == 1) {
@@ -381,11 +622,10 @@
             }
             animationBasic("right");
         }
-
     }
     //基本划屏动画效果
     function animationBasic(direction) {
-        if (direction == "next") {
+        if (direction == "down") {
             outPage = "page_outFromTop";
             inPage = "page_inFromBottom";
         } else if (direction == "pre") {
@@ -408,6 +648,154 @@
             isAnimation = false;
         }, 500)
     }
+    //音乐暂停和播放
+    function playMusic() {
+        var playMusic = document.getElementById("playMusic");
+        if (playMusic.paused) {
+            playMusic.play();
+        } else {
+            playMusic.pause();
+        }
+    }
+    $(".playMusicBtn").click(function () {
+        playMusic();
+        if ($(".playMusicBtn").hasClass("musicRotate") || $(".playMusicNeedle").hasClass("needleRotate") == false) {
+            $(".playMusicBtn").removeClass("musicRotate");
+            $(".playMusicNeedle").addClass("needleRotate");
+            $(".playMusicNeedle").removeClass("needleRotateBack");
+
+        } else {
+            $(".playMusicBtn").addClass("musicRotate");
+            $(".playMusicNeedle").removeClass("needleRotate");
+            $(".playMusicNeedle").addClass("needleRotateBack");
+        }
+    });
+
+
+    //绑定数据
+    function getQuery(name) {
+        url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    $(".option").click(function () {
+        $(this).addClass("choseBGC");
+    });
+
+    //取得问题
+    function getQuestion(qid) {
+        var sid = getQuery("sid");
+        console.log("向服务器发送的qid是" + qid);
+        $.post("answer.php?sid=" + sid + "&qid=" + qid + "&a=" + selectedAnswer, function (question) {
+            curQid = question.id;
+            if (curQid < 0) {
+                console.log(question);
+                isLastQuestion(question);
+            } else {
+                console.log("从服务器取回的这道题的curQid是" + curQid);
+                curQuestion = question;
+                showQuestion();
+                tipY = question.answers.y.pop;
+
+                $(".question_And_Options li").show();
+                console.log("下方console出的是从服务器取回的当前这道题目");
+                console.log(question);
+            }
+        }, 'json');
+    }
+
+    //显示问题
+    function showQuestion() {
+        $(".question_Title").text(curQuestion.text);
+    }
+
+    //点击是
+    $(".choseA").bind("click", function () {
+        selectedAnswer = "y";
+        $(".tip_Pop").text(tipY).show();
+        $(".nextBtn").show();
+//        $(".choseB").unbind("click");//选中一个选项后其他项则不可点击
+    });
+
+    //点击否
+    $(".choseB").bind("click", function () {
+        selectedAnswer = "n";
+        $(".tip_Pop").text(tipN).show();
+        $(".nextBtn").show();
+//        $(".choseA").unbind("click");//选中一个选项后其他项则不可点击
+    });
+
+    //点击继续按钮
+    $(".nextBtn").click(function () {
+        getQuestion(curQid);
+        console.log("点击继续按钮后已经取得了问题");
+        $(".nextBtn").hide();
+        $(".tip_Pop").hide();
+        $(".option").removeClass("choseBGC");
+    });
+
+
+    //最后一道题
+    function isLastQuestion(result) {
+        console.log("下方显示result");
+        console.log(result);
+        $(".page1").hide();
+        $(".page2").show();
+        $(".questionNum").hide();
+        $(".result_Title").attr("src", "http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/resn" + result.type + ".png");
+        $(".result_Num").text(result.point);
+        $(".result_Description").text(result.detail);
+    }
+
+    //微信分享config
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: 'wx1b995d5a13c1d4c4', // 必填，公众号的唯一标识
+        timestamp: '<?=$timestamp?>', // 必填，生成签名的时间戳
+        nonceStr: '<?=$nonceStr?>', // 必填，生成签名的随机串
+        signature: '<?=$signature?>',// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function () {
+        //微信分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '七夕有奖趣味测试', // 分享标题
+            desc: '测测你的撩汗指数，让你七夕不孤单！', // 分享描述
+            link: 'http://stage.yunyunlive.cn/survey/start.php?uid=' + uid + '&cid=' + cid, // 分享链接
+            imgUrl: 'http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/title.jpg', // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+//                var sid = getQuery("sid");
+//                $.get("shared.php?sid=" + sid + "&type=1");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        //微信分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '七夕有奖趣味测试：测测你的撩汗指数，让你七夕不孤单！', // 分享标题
+            link: 'http://stage.yunyunlive.cn/survey/start.php?uid=' + uid + '&cid=' + cid, // 分享链接
+            imgUrl: 'http://yunyunlive.oss-cn-beijing.aliyuncs.com/survey/title.jpg', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+//                var sid = getQuery("sid");
+//                $.get("shared.php?sid=" + sid + "&type=2");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+
 
 </script>
 
